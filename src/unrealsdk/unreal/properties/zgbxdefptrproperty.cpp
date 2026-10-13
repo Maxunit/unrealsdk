@@ -22,7 +22,7 @@ void PropTraits<ZGbxDefPtrProperty>::set(const ZGbxDefPtrProperty* prop,
     // Current assumption is, if you have a type, it must inherit from the struct in the property
     if (value.type != nullptr) {
         auto prop_cls = prop->Struct();
-        if (!value.type->inherits(prop_cls)) {
+        if (prop_cls != nullptr && !value.type->inherits(prop_cls)) {
             throw std::runtime_error("Ref type does not inherit from " + prop_cls->Name());
         }
     }
